@@ -1,0 +1,50 @@
+[[spring-core]]
+= Core Technologies
+= 核心技术
+
+:doc-root: https://docs.spring.io
+:api-spring-framework: {doc-root}/spring-framework/docs/{spring-version}/javadoc-api/org/springframework
+:toc: left
+:toclevels: 4
+:tabsize: 4
+:docinfo1:
+
+This part of the reference documentation covers all the technologies that are
+absolutely integral to the Spring Framework.
+
+这部分参考文档涵盖了Spring框架不可或缺的技术。
+
+Foremost amongst these is the Spring Framework's Inversion of Control (IoC) container.
+A thorough treatment of the Spring Framework's IoC container is closely followed by
+comprehensive coverage of Spring's Aspect-Oriented Programming (AOP) technologies.
+The Spring Framework has its own AOP framework, which is conceptually easy to
+understand and which successfully addresses the 80% sweet spot of AOP requirements
+in Java enterprise programming.
+
+其中最重要的是Spring框架中的控制反转(IOC)容器，首先对Spring框架的IOC容器进行彻底的分析，
+紧接着对Spring面向切面(AOP)技术进行全面的介绍。Spring用自己的AOP框架，它不仅在概念上易于理解
+并且通过使用AOP成功的解决了Java企业编程中80%的痛点。
+
+Coverage of Spring's integration with AspectJ (currently the richest -- in terms of
+features -- and certainly most mature AOP implementation in the Java enterprise space)
+is also provided.
+
+还提供了Spring与AspectJ(就功能而言，它是目前在Java企业领域中最丰富并且最成熟的AOP实现)的集成。
+
+include::core/core-beans.adoc[leveloffset=+1]
+
+include::core/core-resources.adoc[leveloffset=+1]
+
+include::core/core-validation.adoc[leveloffset=+1]
+
+include::core/core-expressions.adoc[leveloffset=+1]
+
+include::core/core-aop.adoc[leveloffset=+1]
+
+include::core/core-aop-api.adoc[leveloffset=+1]
+
+include::core/core-null-safety.adoc[leveloffset=+1]
+
+include::core/core-databuffer-codec.adoc[leveloffset=+1]
+
+include::core/core-appendix.adoc[leveloffset=+1]

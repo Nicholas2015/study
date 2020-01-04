@@ -1,0 +1,221 @@
+[[overview]]
+= Spring Framework Overview
+= Spring框架简介
+:toc: left
+:toclevels: 1
+:docinfo1:
+
+Spring makes it easy to create Java enterprise applications. It provides everything you
+need to embrace the Java language in an enterprise environment, with support for Groovy
+and Kotlin as alternative languages on the JVM, and with the flexibility to create many
+kinds of architectures depending on an application's needs. As of Spring Framework 5.1,
+Spring requires JDK 8+ (Java SE 8+) and provides out-of-the-box support for JDK 11 LTS.
+Java SE 8 update 60 is suggested as the minimum patch release for Java 8, but it is
+generally recommended to use a recent patch release.
+
+Spring使得Java企业应用开发变得简单。它提供了在企业环境中使用Java语言所需要的一切并且可以根据应用的需求灵活的构建多种架构，
+同时也支持Groovy和Kotlin这些基于JVM使用的替代语言。从Spring框架5.1开始，使用Spring需要JDK8+（Java SE 8+）版本并且也提供
+了对JDK11 LTS版本的支持。建议将Java SE8第60个更新版本作为使用Java8的最小修订版本，但是通常推荐使用最新修订版。
+
+Spring supports a wide range of application scenarios. In a large enterprise, applications
+often exist for a long time and have to run on a JDK and application server whose upgrade
+cycle is beyond developer control. Others may run as a single jar with the server embedded,
+possibly in a cloud environment. Yet others may be standalone applications (such as batch
+or integration workloads) that do not need a server.
+
+Spring支持广泛的应用场景。在大型企业中，通常应用程序是长时间存在并且运行在一个更新周期不受开发人员控制的JDK和应用服务器上。
+其他的可能就是运行在内嵌服务器或者云环境上的一个独立jar。还有一些可能就是不需要服务器的独立应用程序(比如批处理或者集成负载)。
+
+Spring is open source. It has a large and active community that provides continuous feedback
+based on a diverse range of real-world use cases. This has helped Spring to successfully
+evolve over a very long time.
+
+Spring是开源项目，它拥有一个庞大且活跃的社区，并且能够从各种实际使用案例中得到持续的反馈。这也是在Spring在长期发展中走向成功的原因。
+
+[[overview-spring]]
+== What We Mean by "Spring"
+== 我们所说的“Spring”是什么？
+
+The term "Spring" means different things in different contexts. It can be used to refer to
+the Spring Framework project itself, which is where it all started. Over time, other Spring
+projects have been built on top of the Spring Framework. Most often, when people say
+"Spring", they mean the entire family of projects. This reference documentation focuses on
+the foundation: the Spring Framework itself.
+
+“Spring”一词在不同的上下中代表的含义不尽相同。它可以代表着Spring Framework项目本身，也可以说是它一切的开始。
+随着时间的推移，也有很多其他的Spring项目在Spring Framework基础上开发出来。通常人们所说的“Spring”代表的是整个项目系列。
+本参考文档重点关注的是Spring框架自身。
+
+The Spring Framework is divided into modules. Applications can choose which modules they need.
+At the heart are the modules of the core container, including a configuration model and a
+dependency injection mechanism. Beyond that, the Spring Framework provides foundational
+support for different application architectures, including messaging, transactional data and
+persistence, and web. It also includes the Servlet-based Spring MVC web framework and, in
+parallel, the Spring WebFlux reactive web framework.
+
+Spring框架被分成了多个模块，应用程序可以在使用时选择他们所需要的模块。核心容器的核心模块包含配置模式以及依赖注入机制。
+除此之外，Spring框架还提供了对不同应用架构的功能支持，包括消息传递、数据事务和持久化以及WEB。它还包含了基于Servlet的Spring
+MVC Web框架以及与之并行存在Spring WebFlux响应式Web框架。
+
+A note about modules: Spring's framework jars allow for deployment to JDK 9's module path
+("Jigsaw"). For use in Jigsaw-enabled applications, the Spring Framework 5 jars come with
+"Automatic-Module-Name" manifest entries which define stable language-level module names
+("spring.core", "spring.context" etc) independent from jar artifact names (the jars follow
+the same naming pattern with "-" instead of ".", e.g. "spring-core" and "spring-context").
+Of course, Spring's framework jars keep working fine on the classpath on both JDK 8 and 9+.
+
+关于模块化注意点：Spring框架支持部署到JDK9的模块化路径("Jigsaw")。为了在启用Jigsaw的应用程序中使用，在Spring5的jar中加入了
+“Automatic-Module-Name”清单列表用于定义独立于jar包名（这些jar遵循着相同的命名模式：使用“-”代替“.”,如："spring-core"和"spring-context"）
+的标准语言级别的模块化名称（比如"spring.core"和"spring.context"）。当然，Spring框架jar在JDK8和JDK9+类路径上很好的运行。
+
+
+[[overview-history]]
+== History of Spring and the Spring Framework
+== Spring的历史与Spring框架
+
+Spring came into being in 2003 as a response to the complexity of the early
+https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition[J2EE] specifications.
+While some consider Java EE and Spring to be in competition, Spring is, in fact, complementary
+to Java EE. The Spring programming model does not embrace the Java EE platform specification;
+rather, it integrates with carefully selected individual specifications from the EE umbrella:
+
+Spring诞生于早期2003复杂的 https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition[J2EE] 规范中。很多人认为
+Spring与Java EE是竞争关系，其实Spring对Java EE的补充。尽管Spring编程模型不包含Java EE平台规范，但是它与Java EE中精心选择的
+各个规范结合在一起使用。
+
+* Servlet API (https://jcp.org/en/jsr/detail?id=340[JSR 340])
+* WebSocket API (https://www.jcp.org/en/jsr/detail?id=356[JSR 356])
+* Concurrency Utilities (https://www.jcp.org/en/jsr/detail?id=236[JSR 236])
+* JSON Binding API (https://jcp.org/en/jsr/detail?id=367[JSR 367])
+* Bean Validation (https://jcp.org/en/jsr/detail?id=303[JSR 303])
+* JPA (https://jcp.org/en/jsr/detail?id=338[JSR 338])
+* JMS (https://jcp.org/en/jsr/detail?id=914[JSR 914])
+* as well as JTA/JCA setups for transaction coordination, if necessary.
+
+The Spring Framework also supports the Dependency Injection
+(https://www.jcp.org/en/jsr/detail?id=330[JSR 330]) and Common Annotations
+(https://jcp.org/en/jsr/detail?id=250[JSR 250]) specifications, which application developers
+may choose to use instead of the Spring-specific mechanisms provided by the Spring Framework.
+
+Spring框架也支持依赖注入(https://www.jcp.org/en/jsr/detail?id=330[JSR 330])和常规
+注解(https://jcp.org/en/jsr/detail?id=250[JSR 250])规范的支持，开发人员可以自由选择使用规范，而不是仅仅局限于
+使用Spring框架特定的Spring机制。
+
+As of Spring Framework 5.0, Spring requires the Java EE 7 level (e.g. Servlet 3.1+, JPA 2.1+)
+as a minimum - while at the same time providing out-of-the-box integration with newer APIs
+at the Java EE 8 level (e.g. Servlet 4.0, JSON Binding API) when encountered at runtime.
+This keeps Spring fully compatible with e.g. Tomcat 8 and 9, WebSphere 9, and JBoss EAP 7.
+
+从Spring5.0开始，使用Spring至少要使用Java EE7版本（比如：Servlet 3.1+和JPA 2.1+）,同时也提供了对Java EE 8运行时集成的新
+API的支持（比如：Servlet4.0和JSON Binding API）。
+
+Over time, the role of Java EE in application development has evolved. In the early days of
+Java EE and Spring, applications were created to be deployed to an application server.
+Today, with the help of Spring Boot, applications are created in a devops- and
+cloud-friendly way, with the Servlet container embedded and trivial to change.
+As of Spring Framework 5, a WebFlux application does not even use the Servlet API directly
+and can run on servers (such as Netty) that are not Servlet containers.
+
+随着时间的推移，Java EE在应用程序开发中的作用也在发生变化。在早期开发的Java EE和Spring应用程序均是被部署到应用服务器上。
+如今，通过使用SpringBoot内嵌Servlet容器使得在devops和云环境创建应用更加的方便并且变化很小。
+
+Spring continues to innovate and to evolve. Beyond the Spring Framework, there are other
+projects, such as Spring Boot, Spring Security, Spring Data, Spring Cloud, Spring Batch,
+among others. It’s important to remember that each project has its own source code repository,
+issue tracker, and release cadence. See https://spring.io/projects[spring.io/projects] for
+the complete list of Spring projects.
+
+随着Spring的持续创新和发展，除了Spring框架还有其他的项目，比如：Spring Boot, Spring Security, Spring Data, Spring Cloud, Spring Batch等。
+请牢记，每个项目都有自己的源码仓库、问题追踪以及版本发布规律。有关Spring项目的完整列表，请参考： https://spring.io/projects[spring.io/projects]
+
+
+
+[[overview-philosophy]]
+== Design Philosophy
+== 设计原理
+
+When you learn about a framework, it’s important to know not only what it does but what
+principles it follows. Here are the guiding principles of the Spring Framework:
+
+当学习一个框架时，很重要的一点是不仅要了解它的原理也要遵循它的设计原则。以下是Spring框架的指导原则。
+
+* Provide choice at every level. Spring lets you defer design decisions as late as possible.
+For example, you can switch persistence providers through configuration without changing
+your code. The same is true for many other infrastructure concerns and integration with
+third-party APIs.
+* Accommodate diverse perspectives. Spring embraces flexibility and is not opinionated
+about how things should be done. It supports a wide range of application needs with
+different perspectives.
+* Maintain strong backward compatibility. Spring’s evolution has been carefully managed
+to force few breaking changes between versions. Spring supports a carefully chosen range
+of JDK versions and third-party libraries to facilitate maintenance of applications and
+libraries that depend on Spring.
+* Care about API design. The Spring team puts a lot of thought and time into making APIs
+that are intuitive and that hold up across many versions and many years.
+* Set high standards for code quality. The Spring Framework puts a strong emphasis on
+meaningful, current, and accurate javadoc. It is one of very few projects that can claim
+clean code structure with  no circular dependencies between packages.
+
+* 提供各个级别的选择。Spring使你尽可能的推迟你的设计决策。比如：你可以在不改变代码的情况通过切换配置提供功能的持久化。
+对于许多其他的基础架构问题以及与第三方API集成也是一样的。
+* 多角度兼容。Spring具有灵活性且不去限制你该怎么去做，支持具有不同视角的广泛应用需求。
+* 强大的向后兼容性。Spring的演变是被精心管理的，所有版本之间没有重大的变化。Spring支持精心选择的JDK版本以及第三方库，
+以方便维护依赖于Spring的应用和第三方库。
+* 重视API设计。Spring团队在设计API上投入了大量的思考和时间，使其能够容易理解以及能够在多版本中长久的支持。
+* 高标准的代码质量。Spring框架强调javadoc要有意义、保持最新以及含义准确。Spring框架可以自豪的说，它是极少具有代码结构简洁
+并且包之间没有循环依赖的项目之一。
+
+[[overview-feedback]]
+== Feedback and Contributions
+== 反馈与贡献
+
+For how-to questions or diagnosing or debugging issues, we suggest using StackOverflow,
+and we have a https://spring.io/questions[questions page] that lists the suggested tags to use.
+If you're fairly certain that there is a problem in the Spring Framework or would like
+to suggest a feature, please use the https://github.com/spring-projects/spring-framework/issues[GitHub Issues].
+
+对于如何提问、诊断以及调试之类的问题，我们建议使用StackOverflow，以及我们的
+https://spring.io/questions[问题页面] 列出了一些使用建议标签。如果你非常确定Spring框架存在问题或者你想提出一些新功能，
+请到 https://github.com/spring-projects/spring-framework/issues[GitHub Issues]反馈。
+
+If you have a solution in mind or a suggested fix, you can submit a pull request on
+https://github.com/spring-projects/spring-framework[Github]. However, please keep in mind
+that, for all but the most trivial issues, we expect a ticket to be filed in the issue
+tracker, where discussions take place and leave a record for future reference.
+
+如果您有解决方案或者建议的解决方案，你可以到 https://github.com/spring-projects/spring-framework[Github]提交你的需求。
+但是请记住，除了一些琐碎的问题，我们希望将问题的讨论记录在问题追踪中，以备将来作参考。
+
+For more details see the guidelines at the
+https://github.com/spring-projects/spring-framework/blob/master/CONTRIBUTING.md[CONTRIBUTING],
+top-level project page.
+
+有关更多的详细信息，请参考顶级项目页面的指南 https://github.com/spring-projects/spring-framework/blob/master/CONTRIBUTING.md[CONTRIBUTING]。
+
+
+
+[[overview-getting-started]]
+== Getting Started
+== 入门
+
+If you are just getting started with Spring, you may want to begin using the Spring
+Framework by creating a https://projects.spring.io/spring-boot/[Spring Boot]-based
+application. Spring Boot provides a quick (and opinionated) way to create a
+production-ready Spring-based application. It is based on the Spring Framework, favors
+convention over configuration, and is designed to get you up and running as quickly
+as possible.
+
+如果你刚刚开始使用Spring，你可能需要使用基于 https://projects.spring.io/spring-boot/[Spring Boot]来创建一个Spring项目。
+Spring Boot提供了一个快速（且便捷）的方式来构建一个基于Spring的生产应用。它基于Spring框架并且旨在让你能够快速上手运行一个项目，
+更倾向于约定优于配置。
+
+You can use https://start.spring.io/[start.spring.io] to generate a basic project or follow
+one of the https://spring.io/guides["Getting Started" guides], such as
+https://spring.io/guides/gs/rest-service/[Getting Started Building a RESTful Web Service].
+As well as being easier to digest, these guides are very task focused, and most of them
+are based on Spring Boot. They also cover other projects from the Spring portfolio that
+you might want to consider when solving a particular problem.
+
+你可以使用 https://start.spring.io/[start.spring.io] 生成一个基础项目工程或者根据以下指南 https://spring.io/guides["Getting Started" guides]操作，
+比如： https://spring.io/guides/gs/rest-service/[Getting Started Building a RESTful Web Service]。这些指南大多数是基于Spring Boot开发的，
+非常注重操作并且易于上手。他们还包含了Spring工程系列中的其他项目，你在解决问题可能需要考虑到他们。
