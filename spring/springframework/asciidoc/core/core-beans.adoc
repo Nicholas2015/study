@@ -1,6 +1,7 @@
 [[beans]]
 = The IoC Container
-= ICO容器
+
+= IoC容器
 This chapter covers Spring's Inversion of Control (IoC) container.
 本章介绍Spring的控制反转（IOC）容器
 
@@ -120,16 +121,20 @@ configuration metadata. This configuration metadata represents how you, as an
 application developer, tell the Spring container to instantiate, configure, and assemble
 the objects in your application.
 
-如上图所示，
+如上图所示，Spring IoC容器使用一种形式的配置元数据。作为一个应用开发者，配置元数据代表着在你的应用程序中你告知Spring IoC容器该如何对对象实例化、配置以及组装。
 
 Configuration metadata is traditionally supplied in a simple and intuitive XML format,
 which is what most of this chapter uses to convey key concepts and features of the
 Spring IoC container.
 
+传统意义上，配置元数据以简单且直观的XML形式提供，这也是本章大部分内容描述Spring IoC的关键概念和功能。
+
 NOTE: XML-based metadata is not the only allowed form of configuration metadata.
 The Spring IoC container itself is totally decoupled from the format in which this
 configuration metadata is actually written. These days, many developers choose
 <<beans-java, Java-based configuration>> for their Spring applications.
+
+NOTE: 基于XML的元数据不是元数据配置的唯一允许形式。Spring IoC容器本身实际上也是与写入的配置元数据完全解耦的。这些日子以来，许多开发人员为他们的Spring应用程序选择使用<<beans-java, Java-based configuration>>
 
 For information about using other forms of metadata with the Spring container, see:
 
@@ -144,10 +149,21 @@ For information about using other forms of metadata with the Spring container, s
   https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html[`@Import`],
   and https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html[`@DependsOn`] annotations.
 
+有关Spring容器使用其他的元数据形式信息，请参考：
+
+* <<beans-annotation-config,Annotation-based configuration>>: Spring 2.5引入了基于注解的配置元数据支持。
+* <<beans-java, Java-based configuration>>: 从Spring 3.0开始，Spring JavaConfig项目提供的许多功能成为了Spring框架核心的一部分。从而你可以通过使用Java配置而不是XML文件来定义你的应用程序之外的Bean。想要使用这些功能，请参考注解：
+  https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html[`@Configuration`],
+  https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html[`@Bean`],
+  https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html[`@Import`],
+和 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html[`@DependsOn`]
+
 Spring configuration consists of at least one and typically more than one bean
 definition that the container must manage. XML-based configuration metadata configures these
 beans as `<bean/>` elements inside a top-level `<beans/>` element. Java
 configuration typically uses `@Bean`-annotated methods within a `@Configuration` class.
+
+Spring配置由一个（通常一个以上）Bean定义组成，并且必须容器管理。基于XML配置元数据配置这些bean作为顶级 `<beans/>` 元素内的 `<bean/>` 元素。Java配置通常在 `@Configuration` 中使用 `@Bean` 注解方法。
 
 These bean definitions correspond to the actual objects that make up your application.
 Typically, you define service layer objects, data access objects (DAOs), presentation
