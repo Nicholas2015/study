@@ -107,7 +107,7 @@ application.
 .The Spring IoC container
 
 .Spring IoC容器
-image::images/container-magic.png[]
+image::../images/container-magic.png[]
 
 
 
@@ -120,7 +120,7 @@ configuration metadata. This configuration metadata represents how you, as an
 application developer, tell the Spring container to instantiate, configure, and assemble
 the objects in your application.
 
-
+如上图所示，
 
 Configuration metadata is traditionally supplied in a simple and intuitive XML format,
 which is what most of this chapter uses to convey key concepts and features of the
