@@ -175,7 +175,12 @@ Spring's integration with AspectJ to configure objects that have been created ou
 the control of an IoC container. See <<aop-atconfigurable,Using AspectJ to
 dependency-inject domain objects with Spring>>.
 
+这些bean对应着构建应用的实际对象。通常体现在你定义的服务层对象、数据访问对象（DAO）、表现层对象（如：Structs `Action` 实例）、基础结构对象（如：Hibernate 的 `SessionFactories`，JMS `Queues`等）。因为创建和加载域对象的是DAO和业务逻辑的职责，通常不会在容器中配置细粒度的域对象。但是你可以在创建IoC容器控制之外的对象时通过Spring集成AspectJ来配置。请参考<<aop-atconfigurable,Using AspectJ to
+dependency-inject domain objects with Spring>>：
+
 The following example shows the basic structure of XML-based configuration metadata:
+
+以下示例展示了基于XML配置元数据的基础结构：
 
 [source,xml,indent=0]
 [subs="verbatim,quotes"]
@@ -204,19 +209,27 @@ The following example shows the basic structure of XML-based configuration metad
 <2> The `class` attribute defines the type of the bean and uses the fully qualified
 classname.
 
+<1> `id` 属性是字符型，用来标识单个bean定义。
+
+<2> `class` 属性定义bean类型和使用的完全限定类名。
+
 The value of the `id` attribute refers to collaborating objects. The XML for
 referring to collaborating objects is not shown in this example. See
 <<beans-dependencies,Dependencies>> for more information.
 
-
+`id` 属性值关联着协作对象，在此例子中XML没有展示引用协作对象内容。请参考 <<beans-dependencies,Dependencies>> 获取更多信息：
 
 [[beans-factory-instantiation]]
 === Instantiating a Container
+
+=== 容器实例化
 
 The location path or paths
 supplied to an `ApplicationContext` constructor are resource strings that let
 the container load configuration metadata from a variety of external resources, such
 as the local file system, the Java `CLASSPATH`, and so on.
+
+提供给 `ApplicationContext` 构造函数一个或多个位置路径是资源字符串，可以让容器加载各种额外资源配置元数据，例如：本地文件系统、Java `CLASSPATH` 等。
 
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
@@ -237,7 +250,14 @@ mechanism for reading an InputStream from locations defined in a URI syntax. In 
 `Resource` paths are used to construct applications contexts, as described in <<resources-app-ctx>>.
 ====
 
+[NOTE]
+====
+在学习了Spring IoC容器后，你可能想了解更多关于Spring的 `Resource` 抽象(如 <<resources>> 中所述)，并且提供了一个简单的机制从URI语法位置定义中读取输入流。尤其是使用 `Resource` 路径构造应用上下文，如 <<resources-app-ctx>> 中所述。
+====
+
 The following example shows the service layer objects `(services.xml)` configuration file:
+
+以下示例展示的是服务层对象 `(services.xml)` 配置文件：
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
@@ -261,6 +281,8 @@ The following example shows the service layer objects `(services.xml)` configura
 ----
 
 The following example shows the data access objects `daos.xml` file:
+
+以下示例展示的是数据访问对象 `daos.xml` 文件：
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
@@ -292,9 +314,12 @@ definition. This linkage between `id` and `ref` elements expresses the dependenc
 collaborating objects. For details of configuring an object's dependencies, see
 <<beans-dependencies,Dependencies>>.
 
+在前面的例子中，服务层是由 `PetStoreServiceImpl` 类以及 两个类型为 `JpaAccountDao` 和 `JpaItemDao` 对象组成（基于JPA的标准对象关系映射）。 `property name` 元素指的是JavaBean的属性名，`ref` 元素对应的是其他的Bean定义。  `id` 和 `ref` 元素之间的联系体现了协作对象之间的依赖关系。有关配置对象依赖关系的详细信息，请参考：<<beans-dependencies,Dependencies>>
 
 [[beans-factory-xml-import]]
 ==== Composing XML-based Configuration Metadata
+
+==== 构建基于XML的配置元数据
 
 It can be useful to have bean definitions span multiple XML files. Often, each individual
 XML configuration file represents a logical layer or module in your architecture.
