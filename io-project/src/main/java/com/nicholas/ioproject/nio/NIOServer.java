@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class NIOServer {
 
+
+    //register
     public static void main(String[] args) throws IOException {
         Selector serverSelector = Selector.open();
         Selector clientSelector = Selector.open();
