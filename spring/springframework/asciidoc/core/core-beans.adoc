@@ -324,11 +324,15 @@ collaborating objects. For details of configuring an object's dependencies, see
 It can be useful to have bean definitions span multiple XML files. Often, each individual
 XML configuration file represents a logical layer or module in your architecture.
 
+让bean定义跨多个XML文件使用是很有用的，通常在应用架构中每个单独的配置文件代表着一个逻辑层或模块。
+
 You can use the application context constructor to load bean definitions from all these
 XML fragments. This constructor takes multiple `Resource` locations, as was shown in the
 <<beans-factory-instantiation, previous section>>. Alternatively, use one or more
 occurrences of the `<import/>` element to load bean definitions from another file or
 files. The following example shows how to do so:
+
+你可以使用应用上下文构造器从这些XML片段中加载Bean定义。如上一节<<beans-factory-instantiation>> 中所描述，构造函数有多个`Resource` 路径。也可以使用一个或多个 `<import/>` 标签从一个或多个文件中加载Bean定义。如下示例所示：
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
@@ -352,6 +356,8 @@ that these paths are relative, it is better form not to use the slash at all. Th
 contents of the files being imported, including the top level `<beans/>` element, must
 be valid XML bean definitions, according to the Spring Schema.
 
+在前面的例子中，外部化bean定义 是从`services.xml`, `messageSource.xml`, and `themeSource.xml` 三个文件中加载的。所有位置路径都是相对于进行导入的定义文件，所以 `service.xml` 必须跟导入的文件在同一个目录或类路径下，而 `messageSource.xml` 和 `themeSource.xml` 必须导入文件路径在 `resources` 位置下。正如你所见，资路径的前斜杠是被忽略的。鉴于资源路径是相对的，最好不要使用斜杠。根据Spring Schema导入的文件内容（包括顶级标签 `<beans/>`）必须符合XML Bean定义。
+
 [NOTE]
 ====
 It is possible, but not recommended, to reference files in parent directories using a
@@ -367,6 +373,11 @@ aware that you are coupling your application's configuration to specific absolut
 locations. It is generally preferable to keep an indirection for such absolute
 locations -- for example, through "${...}" placeholders that are resolved against JVM
 system properties at runtime.
+====
+
+[NOTE]
+====
+可以使用 "../" 相对路径引用父目录中的文件（不推荐使用这种方式），会创建一个当前程序意外的文件依赖。
 ====
 
 The namespace itself provides the import directive feature. Further
