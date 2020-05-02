@@ -72,7 +72,6 @@ public class RomanNum {
     public int romanToInt(String s) {
         int sum = 0;
         List<String> list = new ArrayList<>();
-        int index = 0;
         Roman[] values = Roman.values();
         for (int i = values.length - 1; i >= 0; i--) {
             String roman = values[i].roman;
